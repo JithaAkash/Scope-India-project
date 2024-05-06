@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet"th:href="@{/css/style.css}">
+
+	<title>Registration</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+	<header>
+		<div class="logo">
+			<img th:src="@{/images/scope_india_logo.jpg}" alt="Scope India Logo" class="logo">
+
+		</div>
+		<nav>
+			<ul>
+				<li><a th:href="@{/home}">Home</a></li>
+				<li><a th:href="@{/about}">About Us</a></li>
+				<li><a th:href="@{/contact}">Contact</a></li>
+				<li><a th:href="@{/registration}">Registration</a></li>
+				<li><a th:href="@{/login}">Login</a></li>
+				<li><a th:href="@{/studentdashboard}">Student Dashboard</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="registration-container">
+		<form id="registration-form" th:action="@{/send}" method="post" th:object="${ScopeProjectModel}">
+			<label for="firstname">First Name:</label>
+			<input type="text" id="firstname" name="firstname" th:field="*{firstname}"
+			placeholder="Enter your first name" />
+			<span th:errors="*{firstname}"></span><br><br>
+
+			<label for="lastname">Last Name:</label>
+			<input type="text" id="lastname" name="lastname" th:field="*{lastname}"
+			placeholder="Enter your last name" />
+			<span th:errors="*{lastname}"></span><br><br>
+
+			<label for="gender">Gender:</label>
+			<select id="gender" name="gender" th:field="*{gender}">
+				<option value="" selected>Select your gender</option>
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="other">Other</option>
+			</select>
+			<span th:errors="*{gender}"></span><br><br>
+
+			<label for="dateofbirth">Date of Birth:</label>
+			<input type="date" id="dateofbirth" name="dateofbirth" th:field="*{dateofbirth}" required />
+			<span th:errors="*{dateofbirth}"></span><br><br>
+
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" th:field="*{email}" placeholder="Enter your email" required />
+			<span th:errors="*{email}"></span><br><br>
+
+			<label for="phone">Phone Number:</label>
+			<input type="tel" id="phone" name="phone" th:field="*{phone}" placeholder="Enter your phone number">
+			<span th:errors="*{phone}"></span><br><br>
+
+			<label>Select Country:</label>
+			<select name="" id="country">
+				<option value="0">Select country</option>
+				<option th:each="country:${countrylist}" th:value="${country.countryid}"
+				 th:text="${country.countryname}"></option>
+			</select><br><br>
+
+			<label>Select State:</label>
+			<select id="state">
+				<option value="0">Select state</option>
+			</select><br><br>
+
+			<label>Select City:</label>
+			<select id="city">
+				<option value="0">Select city</option>
+			</select><br><br>
+
+			<label for="hobby" class="hobby">Hobbies:</label>
+			<div id="hobbies">
+				
+				<div class="hobby">
+					<input type="checkbox" id="reading" th:field="*{hobby}" th:value="reading">
+					<label for="hobby1">Reading</label>
+				</div>
+
+				<div class="hobby">
+					<input type="checkbox" id="travelling" th:field="*{hobby}" th:value="travelling">
+					<label for="hobby2">Traveling</label>
+				</div>
+
+				<div class="hobby">
+  					 <input type="checkbox" id="music" th:field="*{hobby}" th:value="music">
+  					 <label for="hobby3">Music</label><br>
+				</div>
+
+				<div class="hobby">
+					 <input type="checkbox" id="cooking" th:field="*{hobby}" th:value="cooking">
+					<label for="hobby4">Cooking</label>
+				</div>
+			</div>
+			<span th:errors="*{hobby}"></span><br><br>
+
+			<div>
+				<label for="avatar">Upload Avatar:</label>
+				<input type="file" id="avatar" name="avatar" />
+			</div>
+			<span th:errors="*{avatar}"></span><br><br>
+
+			<input type="submit" th:value="Register">
+
+
+		</form>
+	</div>
+	<script>
+		$(document).ready(function () {
+			$("#country").change(function () {
+				var countryId = $(this).val();
+
+				$.ajax({
+					url: '/state/' + countryId,
+					type: 'GET',
+					success: function (data) {
+						var state = $("#state");
+						state.empty();
+						$.each(data, function (index, stat) {
+							state.append('<option value="' + stat.stateid + '">' + stat.statename + '</option>');
+						});
+					}
+				});
+			});
+		});
+
+	</script>
+		<script>
+    		$(document).ready(function () {
+        		$("#state").change(function () {
+            		var stateId = $(this).val();
+
+           	 $.ajax({
+                url: '/city/' + stateId,
+                type: 'GET',
+                success: function (data) {
+                    var city = $("#city");
+                    city.empty();
+                    $.each(data, function (index, cit) {
+                        city.append('<option value="' + cit.cityid + '">' + cit.cityname + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

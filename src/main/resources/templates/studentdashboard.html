@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <!-- Add your styles here -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #007BFF;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a th:href="@{/about}">About</a></li>
+        <li><a th:href="@{/registration}">Registration</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/contact}">Contact</a></li>
+        <li><a th:href="@{/studentdashboard}">Student Dashboard</a></li>
+    </ul>
+
+    <header>
+        <h2>Student Dashboard</h2>
+    </header>
+
+    <nav>
+        <a th:href="@{/courses}">Courses</a>
+        <a th:href="@{/view}">View Profile</a>
+        <a th:href="@{/edit}">Edit Profile</a>
+        <a th:href="@{/password}">Change Password</a>
+        <a th:href="@{/logout}">Logout</a>
+    </nav>
+</body>
+</html>

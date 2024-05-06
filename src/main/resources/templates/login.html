@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SCOPE INDIA</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #007BFF;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #0056b3;
+        }
+
+        section {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007BFF;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Login - SCOPE INDIA</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/registration">Registration</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/studentdashboard">Student Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Login</h2>
+        <form th:action="@{/login}" method="post">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
+            <label for="keepLoggedIn">Keep me logged in</label>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p><a th:href="@{/generateTempPassword}">Forgot password? Generate a temporary password</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 SCOPE INDIA - Your Trusted Career Partner</p>
+    </footer>
+</body>
+</html>

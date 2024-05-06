@@ -1,0 +1,86 @@
+<!-- src/main/resources/templates/profile/edit.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h2 {
+            color: #007BFF;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+            color: #666;
+            display: block;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007BFF;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Profile</h2>
+    
+    <form th:action="@{/profile/save}" th:object="${profile}" method="post">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{lastName}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
